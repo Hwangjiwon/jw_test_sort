@@ -61,6 +61,7 @@ int main(int argc, char *argv[]) {
     }
     
     arr = (int*)malloc(sizeof(int)*size);
+    
     if(strncmp(opt,"same",4)==0){
         for(i=0;i<size;i++)
           arr[i] = size;
