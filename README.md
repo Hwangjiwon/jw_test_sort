@@ -4,5 +4,5 @@
 ## 사용법
 
 ```
-./sort_test text_file_name
+./test_sort [bub|ins|sel] [same|asc|desc|rand] [size]
 ```
