@@ -2,6 +2,35 @@
 #include <stdlib.h>
 #include <string.h>
 
+void init_option(int *arr, int size, char *opt);
+void insert_sort(int *arr, int size);
+void bubble_sort(int *arr, int size);
+void select_sort(int *arr, int size);
+void sort_option(int *arr, int size, char *sort);
+
+
+int main(int argc, char *argv[]) {
+    int *arr;
+    char *sort = argv[1];
+    char *opt = argv[2];
+    int size = atoi(argv[3]);
+    int i;
+
+    if(argc != 4){
+        printf("segmentation error");
+        return -1;
+    }
+
+    arr = (int*)malloc(sizeof(int)*size);
+
+    init_option(arr,size,opt);
+
+    sort_option(arr,size,sort);
+
+    return 0;
+}
+
+
 void init_option(int *arr, int size, char* opt){
     int i;
  
@@ -70,22 +99,8 @@ void select_sort(int *arr, int size){
     }
 }
 
-int main(int argc, char *argv[]) {
-    int *arr;
-    char *sort = argv[1];
-    char *opt = argv[2];
-    int size = atoi(argv[3]);
-    int i;
-    
-    if(argc != 4){
-        printf("segmentation error");
-        return -1;
-    }
-    
-    arr = (int*)malloc(sizeof(int)*size);
-    
-    init_option(arr,size,opt);
-    
+void sort_option(int *arr, int size, char* sort){
+
     if(strncmp(sort,"ins",3)==0)
         insert_sort(arr,size);
     else if(strncmp(sort,"bub",3)==0)
@@ -94,8 +109,6 @@ int main(int argc, char *argv[]) {
         select_sort(arr,size);
     else{
          printf("sort_option error");
-         return -1;
+         return;
     }
-    
-    return 0;
 }
