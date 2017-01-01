@@ -4,5 +4,6 @@
 ## 사용법
 
 ```
+gcc test_sort.c -o test_sort
 ./test_sort [bub|ins|sel] [same|asc|desc|rand] [size]
 ```
