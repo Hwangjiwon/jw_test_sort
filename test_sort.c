@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include <time.h>
 
 void init_option(int *arr, int size, char *opt);
 void insert_sort(int *arr, int size);
@@ -15,7 +16,10 @@ int main(int argc, char *argv[]) {
     char *opt = argv[2];
     int size = atoi(argv[3]);
     int i;
-
+    
+    clock_t t;
+    
+    t=clock();
     if(argc != 4){
         printf("segmentation error");
         return -1;
@@ -26,6 +30,9 @@ int main(int argc, char *argv[]) {
     init_option(arr,size,opt);
 
     sort_option(arr,size,sort);
+
+    t = clock()-t;
+    printf("%ld ms\n",t);
 
     return 0;
 }
