@@ -12,18 +12,24 @@ void sort_option(int *arr, int size, char *sort);
 
 int main(int argc, char *argv[]) {
     int *arr;
-    char *sort = argv[1];
-    char *opt = argv[2];
-    int size = atoi(argv[3]);
+    char *sort;
+    char *opt;
+    int size;
     int i;
-    
+
     clock_t t;
-    
+
     t=clock();
+
     if(argc != 4){
-        printf("segmentation error");
+        printf("segmentation error\n");
         return -1;
     }
+    
+    sort = argv[1];
+    opt = argv[2];
+    size = atoi(argv[3]);
+
 
     arr = (int*)malloc(sizeof(int)*size);
 
@@ -32,7 +38,7 @@ int main(int argc, char *argv[]) {
     sort_option(arr,size,sort);
 
     t = clock()-t;
-    printf("%ld ms\n",t);
+    printf("%s : %ld ms\n",sort,t);
 
     return 0;
 }
@@ -58,7 +64,7 @@ void init_option(int *arr, int size, char* opt){
             arr[i] = rand()%size;
     }
     else{
-        printf("init_option error");
+        printf("init_option error\n");
         return;
     }
 }
@@ -115,7 +121,7 @@ void sort_option(int *arr, int size, char* sort){
     else if(strncmp(sort,"sel",3)==0)
         select_sort(arr,size);
     else{
-         printf("sort_option error");
+         printf("sort_option error\n");
          return;
     }
 }
