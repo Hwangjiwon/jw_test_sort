@@ -137,7 +137,7 @@ int input_check(int argc, char** argv)
 
 	if(argc == 1)
 	{	
-		printf("사용법 출력");
+	    printf("실행예시: ./test_sort -a bub -o asc -s 1004\n");
 		return -1;
 	}
 	else if (argc % 2 == 0 || 0 == strncmp(argv[argc-1],"-",1)) //argc가 홀수 이거나 argv[마지막]이 옵션일때 error
@@ -169,7 +169,7 @@ int input_check(int argc, char** argv)
 			}
 		}
 		if (value[0] == NULL) {
-			printf("print rules\n");
+			printf("실행예시: ./test_sort -a bub -o asc -s 1004\n");
 			return -1;
 		}
 		else {
