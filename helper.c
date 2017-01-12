@@ -1,4 +1,6 @@
+#include <stdio.h>
 
+extern char *value[3];
 
 void init_option(int *arr, int size, char* opt){
     int i;
@@ -32,6 +34,10 @@ void sort_option(int *arr, int size, char* sort){
         bubble_sort(arr,size);
     else if(strncmp(sort,"sel",3)==0)
         select_sort(arr,size);
+    else if(strncmp(sort,"heap",4)==0)
+        heap_sort(arr,size);
+    else if(strncmp(sort,"quick",5)==0)
+        quick_sort(arr,size);
     else{
          printf("sort_option error\n");
          return;
@@ -44,7 +50,7 @@ int input_check(int argc, char** argv)
 
 	if(argc == 1)
 	{	
-	    printf("½ÇÇà¿¹½Ã: ./test_sort -a bub -o asc -s 1004\n");
+	    printf("ì‚¬ìš© ì˜ˆì‹œ: ./test_sort -a bub -o asc -s 1004\n");
 		return -1;
 	}
 	else if (argc % 2 == 0 || 0 == strncmp(argv[argc-1],"-",1)) //argc°¡ È¦¼ö ÀÌ°Å³ª argv[¸¶Áö¸·]ÀÌ ¿É¼ÇÀÏ¶§ error
@@ -61,22 +67,18 @@ int input_check(int argc, char** argv)
 			{ 				
 				if (j == 0 && 0 != strncmp(argv[i+1], "-", 1)) //argv[Â¦]ÀÌ °ªÀÎ°¡
 				{
-					
-//					printf("[%s][%s]\n",argv[i],argv[i+1]);
-					
 					if(0==strcmp(argv[i],"-a"))
 						value[0] = argv[i+1];
 					if(0==strcmp(argv[i],"-o"))
 						value[1] = argv[i+1];
 					if(0==strcmp(argv[i],"-s"))
 						value[2] = argv[i+1];
-
 				}
 				else printf("input error\n");
 			}
 		}
 		if (value[0] == NULL) {
-			printf("½ÇÇà¿¹½Ã: ./test_sort -a bub -o asc -s 1004\n");
+			printf("ì‚¬ìš© ì˜ˆì‹œ: ./test_sort -a bub -o asc -s 1004\n");
 			return -1;
 		}
 		else {

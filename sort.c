@@ -1,4 +1,78 @@
+void q_sort(int *arr, int left, int right){
+    int pi,l,r;
+    l = left;
+    r = right;
+    pi = arr[left]; //arr[0]이 피봇
+    
+    while(left < right){
+        while((arr[right] >= pi) && (left < right))
+            right--;
+        if(left != right)
+            arr[left] = arr[right];
+        
+        while((arr[left] <= pi) && (left < right))
+            left++;
+        if(left != right){
+            arr[right] = arr[left];
+            right--;
+        }
+    }
+    
+    arr[left] = pi;
+    pi = left;
+    left = l;
+    right = r;
+    
+    if(left < pi)
+        q_sort(arr,left,pi-1);
+    if(right > pi)
+        q_sort(arr,pi+1,right);
+}
 
+void quick_sort(int *arr, int size){
+    q_sort(arr,0,size-1);
+}
+
+void swap(int *a, int *b){
+    int temp = *a;
+    *a = *b;
+    *b = temp;
+}
+
+void min_heap(int *arr, int size, int root){
+    int left, right, cur, start, i;
+    if(size - root < 2) return;
+
+    cur = root;
+    while(cur >= 0){
+        i = cur;
+        start = cur;
+        while(start*2+1 < size){
+            left = start*2+1;
+            right = start*2+2;
+            start = left;
+
+            if((right < size) && (arr[right] >= arr[left])){
+                start = right;
+            }
+            if(arr[start] > arr[i]){
+                swap(&arr[i],&arr[start]);
+                i = start;
+            }
+        }
+        --cur;
+    }
+}
+
+void heap_sort(int *arr, int size){
+    //insert heap
+    min_heap(arr, size, size/2-1);
+    while(size > 0){
+       --size;
+       swap(&arr[0],&arr[size]);
+       min_heap(arr,size,0);
+    }
+}
 
 void insert_sort(int *arr, int size){
     int i;
@@ -42,3 +116,4 @@ void select_sort(int *arr, int size){
         arr[i] = min;
     }
 }
+
