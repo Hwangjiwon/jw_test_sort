@@ -1,7 +1,7 @@
 #include <stdlib.h>
 
 void merge(int *arr, int start, int mid, int end, int* result) { //Conquer
-	int i = start, j=mid+1, k=start, t;
+	int i = start, j=mid+1, k=0, t;
 	
 	//오름차순 정렬
 	while (i <= mid && j <= end) { 
@@ -25,15 +25,15 @@ void merge(int *arr, int start, int mid, int end, int* result) { //Conquer
 	}
 
 	//arr에 result복사
-	for (t = start; t <= end; t++)
-		arr[t] = result[t];
+	for (t = start, k = 0; t <= end; t++, k++)
+		arr[t] = result[k];
 }
 
 void merge_sort(int *arr, int start, int end) { // Divide
 	int mid = (start + end) / 2;
 	int *result;
 
-	result = (int*)malloc(sizeof(int)*end);
+	result = (int*)malloc(sizeof(int)*(end-start+1));
 	
 	if (start < end) {
 		merge_sort(arr, start, mid);
