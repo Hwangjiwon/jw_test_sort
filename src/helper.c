@@ -38,6 +38,8 @@ void sort_option(int *arr, int size, char* sort){
         heap_sort(arr,size);
     else if(strncmp(sort,"quick",5)==0)
         quick_sort(arr,size);
+	else if(strncmp(sort, "merge",5)==0)
+	    merge_sort(arr, 0, size-1);
     else{
          printf("sort_option error\n");
          return;
@@ -50,7 +52,7 @@ int input_check(int argc, char** argv)
 
 	if(argc == 1)
 	{	
-	    printf("ì‚¬ìš© ì˜ˆì‹œ: ./test_sort -a bub -o asc -s 1004\n");
+	    printf("ì‚¬ìš©ë²• ì˜ˆì‹œ: ./test_sort -a bub -o asc -s 1004\n");
 		return -1;
 	}
 	else if (argc % 2 == 0 || 0 == strncmp(argv[argc-1],"-",1)) //argc°¡ È¦¼ö ÀÌ°Å³ª argv[¸¶Áö¸·]ÀÌ ¿É¼ÇÀÏ¶§ error
@@ -64,7 +66,7 @@ int input_check(int argc, char** argv)
 			k = i%2; //k==1 È¦¼ö   k==0 Â¦¼ö
 			j = (i+1)%2;
 			if (k == 1 && 0 == strncmp(argv[i], "-", 1)) //argv[È¦]ÀÌ ¿É¼ÇÀÎ°¡
-			{ 				
+			{
 				if (j == 0 && 0 != strncmp(argv[i+1], "-", 1)) //argv[Â¦]ÀÌ °ªÀÎ°¡
 				{
 					if(0==strcmp(argv[i],"-a"))
@@ -78,7 +80,7 @@ int input_check(int argc, char** argv)
 			}
 		}
 		if (value[0] == NULL) {
-			printf("ì‚¬ìš© ì˜ˆì‹œ: ./test_sort -a bub -o asc -s 1004\n");
+			printf("ì‚¬ìš©ë²• ì˜ˆì‹œ: ./test_sort -a bub -o asc -s 1004\n");
 			return -1;
 		}
 		else {
@@ -88,13 +90,7 @@ int input_check(int argc, char** argv)
 			if (value[2] == NULL) {
 				value[2] = "32768";
 			}
-		}
-/*		
-		printf("\n#########\n");
-		for (i = 0; i < 3; i++) {
-			printf("value[%d]=%s\n",i,value[i]);
-		}
-*/		
+	    }
 	}
 	return 0;
 }

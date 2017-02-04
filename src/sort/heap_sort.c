@@ -1,41 +1,44 @@
-void swap(int *a, int *b){
-    int temp = *a;
-    *a = *b;
-    *b = temp;
+void swap(int* a, int* b) {
+	int tmp;
+
+	tmp = *a;
+	*a = *b;
+	*b = tmp;
 }
 
-void min_heap(int *arr, int size, int root){
-    int cur;
-    if(size - root < 2) return;
+void siftdown(int* arr, int i, int size) {
+	int l, r, c;
 
-    cur = root;
-    while(cur >= 0){
-       int i = cur;
-       int start = cur;
-        while(start*2+1 < size){
-           int left = start*2+1;
-           int right = start*2+2;
-            start = left;
+	l = i * 2 + 1;
+	r = i * 2 + 2;
 
-            if((right < size) && (arr[right] >= arr[left])){
-                start = right;
-            }
-            if(arr[start] > arr[i]){
-                swap(&arr[i],&arr[start]);
-                i = start;
-            }
-        }
-        --cur;
-    }
+	if (l >= size)
+		return;
+
+	if (l < size && r == size)
+		c = l;
+
+	if (l < size && r < size)
+		c = arr[l] > arr[r] ? l : r;
+
+	if (arr[i] >= arr[c])
+		return;
+
+	swap(arr + i, arr + c);
+	siftdown(arr, c, size);
 }
 
-void heap_sort(int *arr, int size){
-    //insert heap
-    min_heap(arr, size, size/2-1);
-    while(size > 0){
-       --size;
-       swap(&arr[0],&arr[size]);
-       min_heap(arr,size,0);
-    }
+void heapify(int *arr, int size) {
+	int n;
+	for (n = (size - 1) / 2; n >= 0; n--)
+		siftdown(arr, n, size);
 }
 
+void heap_sort(int *arr, int size) {
+	heapify(arr, size);
+
+	while (size > 0) {
+		swap(arr, arr + size - 1);
+		siftdown(arr, 0, --size);
+	}
+}
